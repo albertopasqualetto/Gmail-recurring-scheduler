@@ -54,6 +54,12 @@ function sendScheduledEmails() {
 }
 
 
+function getCurrentUser() {
+  // Necessicary for frontend
+  return Session.getActiveUser().getEmail();
+}
+
+
 function doGet() {
   // Serves html page for web interface
   return HtmlService.createHtmlOutputFromFile('index')

@@ -44,12 +44,12 @@ function addScheduledMessage() {
     const body = document.querySelector('#body').value;
 
     google.script.run.addEmailToSchedule(recipient, subject, body);
-    location.reload();
+    window.location.reload();
 }
 
 function removeScheduledMessage(messageId){
     google.script.run.removeEmailFromSchedule(messageId);
-    location.reload();
+    window.location.reload();
 }
 
 function getEmailAddress(callback) {
