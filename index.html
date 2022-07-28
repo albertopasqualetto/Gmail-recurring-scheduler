@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Gmail scheduler</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+Inscriptional+Pahlavi&amp;display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body style="margin: 45px;">
+    <h1 style="text-align: center;">Gmail daily scheduler</h1>
+    <br>
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+                <input name="recipient" id="recipient" type="email" class="validate">
+                <label for="recipient">Recipient</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input name="subject" id="subject" type="text">
+                <label for="subject">Subject</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+              <textarea name="body" id="body" class="materialize-textarea"></textarea>
+              <label for="body">Body</label>
+            </div>
+        </div>
+
+        <button class="btn waves-effect waves-light right" type="submit" id="addButton" onclick="addScheduledMessage()">Add
+            <i class="material-icons left" style="font-size: 26px">add</i>
+        </button>
+    </form>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <table class="responsive-table">
+        <thead>
+            <tr>
+                <th>Recipient</th>
+                <th>Subject</th>
+                <th>Body</th>
+                <th style="min-width: 49px;max-width: 60px;width: 50px;">Delete</th>
+            </tr>
+        </thead>
+        <tbody id="mainTable">
+            <tr>
+                <td>Cell 1</td>
+                <td>Cell 2</td>
+                <td>Cell 3</td>
+                <td style="text-align: center;" onMouseOver="this.style.backgroundColor='#ff0000'" onMouseOut="this.style.backgroundColor='#FFFFFF'"><i class="material-icons">delete</i></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <div class="center">
+        <span><span id="userEmail"></span> is logged in</span>
+        <br>
+        <a href="https://accounts.google.com/logout" rel="noopener" target="_blank">Logout</a>
+    </div>
+
+
+    <footer class="center">
+        <p>Made by <a href="https://github.com/albertopasqualetto">albertopasqualetto</a> | Code licensed Apache 2.0
+        </p>
+    </footer>
+
+
+    <template id="mockRow">
+        <tr class="table-item">
+            <td></td>
+            <td></td>
+            <td class="del btn-danger">
+                <td style="text-align: center;" onMouseOver="this.style.backgroundColor='#ff0000'" onMouseOut="this.style.backgroundColor='#FFFFFF'"><i class="material-icons">delete</i></td>
+            </td>
+        </tr>
+    </template>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
