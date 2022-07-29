@@ -4,3 +4,4 @@ script_orig.js
 package.json
 package-lock.json
 /node_modules/*
+script.js
