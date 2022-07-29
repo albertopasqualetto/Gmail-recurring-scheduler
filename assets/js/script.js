@@ -25,7 +25,7 @@ function displaySchedule(){
         function (s) {
             const template = document.querySelector('#mockRow');
             let newContents = document.createDocumentFragment();
-            for (let message of s['list']) {
+            for (let message of s) {
                 const clone = document.importNode(template.content, true);
                 let td = clone.querySelectorAll("td");
                 td[0].textContent = message.recipient;
