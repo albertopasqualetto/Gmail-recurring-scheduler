@@ -1,17 +1,25 @@
+/****** `sendScheduledEmails()` IS THE FUNCTION TO BE SCHEDULED ******/
+
+
+/*
+  userProperties.getProperty('scheduledData')
+  is a stringified array of dictionaries with keys recipient, subject, body
+*/
+
 var userProperties = PropertiesService.getUserProperties(); // This is to allow retrieval of stored info
 
 
+// Returns parsed email schedule
 function getScheduledEmails() {
-  //Returns parsed email schedule
   let data = userProperties.getProperty('scheduledData');
-  if (data === null) { //TODO: This is only needed because we don't have an initalizer for the script
+  if (data === null) {
       // initialize the script here!
       data = [];
       setScheduledEmails(data);
   } else {
       data = JSON.parse(data)['list'];
   }
-  console.info(data);
+  console.log(data);
   return data;
 }
 
@@ -35,8 +43,9 @@ function addEmailToSchedule(recipient, subject, body) {
 }
 
 function removeEmailFromSchedule(id) {
+  console.log(id + " removed");
   var scheduledEmails = getScheduledEmails();
-  scheduledEmails.splice(id, 1);
+  scheduledEmails.splice(id, 1);  // remove the element at index id
   setScheduledEmails(scheduledEmails);
 }
 
@@ -61,6 +70,7 @@ function getCurrentUser() {
 }
 
 function getScriptURL() {
+  // Necessary for page reloading
   return ScriptApp.getService().getUrl();
 }
 

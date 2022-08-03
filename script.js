@@ -1,5 +1,5 @@
 'use strict';
-// let scheduledEmails;
+
 
 window.onload = function () {
     displaySchedule();
@@ -23,6 +23,7 @@ function getSchedule(callback) {
 function displaySchedule(){
     getSchedule(
         function (s) {
+            // Use the HTML template to create each message's row
             const template = document.querySelector('#mockRow');
             let newContents = document.createDocumentFragment();
             for (let message of s) {
