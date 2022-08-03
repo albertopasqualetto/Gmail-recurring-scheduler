@@ -31,7 +31,7 @@ function displaySchedule(){
                 td[0].textContent = message.recipient;
                 td[1].textContent = message.subject;
                 td[2].textContent = message.body;
-                td[3].addEventListener('click', function () { removeScheduledMessage(element.closest('tr').rowIndex); });
+                td[3].addEventListener('click', function (e) { console.log(e.target.closest('tr').rowIndex-1); removeScheduledMessage(e.target.closest('tr').rowIndex-1); });  //-1 because of header
                 newContents.appendChild(clone);
             };
 
