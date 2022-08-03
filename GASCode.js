@@ -4,7 +4,6 @@ var userProperties = PropertiesService.getUserProperties(); // This is to allow 
 function getScheduledEmails() {
   //Returns parsed email schedule
   let data = userProperties.getProperty('scheduledData');
-  console.info(data);
   if (data === null) { //TODO: This is only needed because we don't have an initalizer for the script
       // initialize the script here!
       data = [];
@@ -12,6 +11,7 @@ function getScheduledEmails() {
   } else {
       data = JSON.parse(data)['list'];
   }
+  console.info(data);
   return data;
 }
 
@@ -34,9 +34,10 @@ function addEmailToSchedule(recipient, subject, body) {
   setScheduledEmails(scheduledEmails);
 }
 
-function removeScheduledMessage(subject) {
-  document.querySelectorAll('td').forEach(e => { if (e.innerText == subject) { e.parentNode.remove() } });
-  google.script.run.removeEmailFromSchedule(subject);
+function removeEmailFromSchedule(id) {
+  var scheduledEmails = getScheduledEmails();
+  scheduledEmails.splice(id, 1);
+  setScheduledEmails(scheduledEmails);
 }
 
 
@@ -55,7 +56,7 @@ function sendScheduledEmails() {
 
 
 function getCurrentUser() {
-  // Necessicary for frontend
+  // Necessary for frontend
   return Session.getActiveUser().getEmail();
 }
 
