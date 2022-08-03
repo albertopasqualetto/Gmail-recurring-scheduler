@@ -7,6 +7,8 @@ An example of the web interface is shown in Github pages deployment.
 
 If app is showing a white screen, please reload the page.
 
+This app still not handles attachments.
+
 Refer to [this page](https://developers.google.com/apps-script/guides/services/quotas) for quotas.
 
 ## How to use
@@ -18,6 +20,7 @@ Refer to [this page](https://developers.google.com/apps-script/guides/services/q
 5. Create a new trigger for the project and set it to run `sendScheduledEmails` whenever you want.
 6. Create a new deployment with "web application" type (set any name and leave only you as users).
 7. Open the web application URL, that will open the interface for emails scheduling.
+8. Give app the permission to access your Gmail account.
 
 ## Disclaimer
 

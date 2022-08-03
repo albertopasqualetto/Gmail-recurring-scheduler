@@ -24,6 +24,7 @@ function sendScheduledEmails() {
       console.error("[" + now.toDateString() + "] Error in sendin email to: " + value.recipient);
       }
   }
+  // TODO add attachment sending
 }
 
 
