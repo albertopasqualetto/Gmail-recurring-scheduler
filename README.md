@@ -2,6 +2,8 @@
 
 This is a Google Apps Script application that runs recurrently to send a daily email to a list of users.
 
+If app is showing a white screen, please reload the page.
+
 ## How to use
 
 1. Create a new [Google Apps Script](https://script.google.com/home) project.
