@@ -7,6 +7,8 @@ An example of the web interface is shown in Github pages deployment.
 
 If app is showing a white screen, please reload the page.
 
+Refer to [this page](https://developers.google.com/apps-script/guides/services/quotas) for quotas.
+
 ## How to use
 
 1. Create a new [Google Apps Script](https://script.google.com/home) project.
