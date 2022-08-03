@@ -34,6 +34,9 @@ function displaySchedule(){
                 td[3].addEventListener('click', function () { removeScheduledMessage(element.closest('tr').rowIndex); });
                 newContents.appendChild(clone);
             };
+
+            document.querySelectorAll('.table-item').forEach(function (e) { e.remove() });  //Delete old table-items
+            document.querySelector("tbody").appendChild(newContents);                       //Add table-items
         }
     )
 }
