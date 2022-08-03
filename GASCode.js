@@ -9,6 +9,24 @@
 var userProperties = PropertiesService.getUserProperties(); // This is to allow retrieval of stored info
 
 
+function sendScheduledEmails() {
+  const now = new Date();
+  listToSend = getScheduledEmails();
+  if(listToSend.length === 0){
+    console.info("[" + now.toDateString() + "] No emails to send");
+    return;
+  }
+  for (let message of listToSend){
+    try{
+      GmailApp.sendEmail(message.recipient, message.subject, message.body);
+      console.info("[" + now.toDateString() + "] Email sent to: " + value.recipient);
+    } catch(err){
+      console.error("[" + now.toDateString() + "] Error in sendin email to: " + value.recipient);
+      }
+  }
+}
+
+
 // Returns parsed email schedule
 function getScheduledEmails() {
   let data = userProperties.getProperty('scheduledData');
@@ -47,24 +65,6 @@ function removeEmailFromSchedule(id) {
   var scheduledEmails = getScheduledEmails();
   scheduledEmails.splice(id, 1);  // remove the element at index id
   setScheduledEmails(scheduledEmails);
-}
-
-
-function sendScheduledEmails() {
-  const now = new Date();
-  listToSend = getScheduledEmails();
-  if(listToSend.length === 0){
-    console.info("[" + now.toDateString() + "] No emails to send");
-    return;
-  }
-  for (let message of listToSend){
-    try{
-      GmailApp.sendEmail(message.recipient, message.subject, message.body);
-      console.info("[" + now.toDateString() + "] Email sent to: " + value.recipient);
-    } catch(err){
-      console.error("[" + now.toDateString() + "] Error in sendin email to: " + value.recipient);
-      }
-  }
 }
 
 
