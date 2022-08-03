@@ -31,7 +31,7 @@ function displaySchedule(){
                 td[0].textContent = message.recipient;
                 td[1].textContent = message.subject;
                 td[2].textContent = message.body;
-                td[3].addEventListener('click', function (e) { console.log(e.target.closest('tr').rowIndex-1); removeScheduledMessage(e.target.closest('tr').rowIndex-1); });  //-1 because of header
+                td[3].addEventListener('click', function (e) { removeScheduledMessage(e.target.closest('tr').rowIndex-1); });   //-1 because of header
                 newContents.appendChild(clone);
             };
 
@@ -47,12 +47,12 @@ function addScheduledMessage() {
     const body = document.querySelector('#body').value;
 
     google.script.run.addEmailToSchedule(recipient, subject, body);
-    window.location.reload();
+    reloadPage();
 }
 
 function removeScheduledMessage(messageId){
     google.script.run.removeEmailFromSchedule(messageId);
-    window.location.reload();
+    reloadPage();
 }
 
 function getEmailAddress(callback) {
@@ -62,4 +62,8 @@ function displayEmailAddress() {
     getEmailAddress(function (address) {
         document.querySelector('#userEmail').innerText = address;
     })
+}
+
+function reloadPage(){
+    google.script.run.withSuccessHandler(function(url){ window.open(url,"_top"); }).getScriptURL();
 }

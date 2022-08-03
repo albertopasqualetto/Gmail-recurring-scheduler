@@ -59,6 +59,9 @@ function getCurrentUser() {
   return Session.getActiveUser().getEmail();
 }
 
+function getScriptURL() {
+  return ScriptApp.getService().getUrl();
+}
 
 function doGet() {
   // Serves html page for web interface
