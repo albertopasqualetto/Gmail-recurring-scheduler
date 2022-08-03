@@ -1,6 +1,9 @@
 # Gmail recurring scheduler
 
 This is a Google Apps Script application that runs recurrently to send a daily email to a list of users.
+The emails are scheduled with an easy web interface.
+
+An example of the web interface is shown in Github pages deployment.
 
 If app is showing a white screen, please reload the page.
 
@@ -16,4 +19,4 @@ If app is showing a white screen, please reload the page.
 
 ## Disclaimer
 
-This project is not affiliated with Google and is not responsible for any damage caused by using this application.
+This project is not affiliated with Google and the author is not responsible for any damage caused by using this application.

@@ -67,4 +67,5 @@ function displayEmailAddress() {
 
 function reloadPage(){
     google.script.run.withSuccessHandler(function(url){ window.open(url,"_top"); }).getScriptURL();
+    // TODO fix whitepage after reload (only after adding new message)
 }
