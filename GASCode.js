@@ -1,4 +1,4 @@
-/****** `sendScheduledEmails()` IS THE FUNCTION TO BE SCHEDULED ******/
+/****** `sendScheduledEmails` IS THE FUNCTION TO BE SCHEDULED ******/
 
 
 /*

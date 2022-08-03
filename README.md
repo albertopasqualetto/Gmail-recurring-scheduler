@@ -8,7 +8,7 @@ This is a Google Apps Script application that runs recurrently to send a daily e
 2. Copy `GASCode.js` code into a `.gs` file in the project.
 3. Copy `index.html` code into a new `index.html` file in the project.
 4. Add Gmail service from the left side bar.
-5. Create a new trigger for the project and set it to run whenever you want.
+5. Create a new trigger for the project and set it to run `sendScheduledEmails` whenever you want.
 6. Create a new deployment with "web application" type (set any name and leave only you as users).
 7. Open the web application URL, that will open the interface for emails scheduling.
 
