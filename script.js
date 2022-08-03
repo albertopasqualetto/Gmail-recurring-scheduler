@@ -42,7 +42,7 @@ function displaySchedule(){
 }
 
 function addScheduledMessage() {
-    const recipient = document.querySelector('#recipient').value;
+    const recipient = document.querySelector('#recipient').value.trim();
     const subject = document.querySelector('#subject').value;
     const body = document.querySelector('#body').value;
 
