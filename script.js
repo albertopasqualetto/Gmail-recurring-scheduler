@@ -47,13 +47,22 @@ function addScheduledMessage() {
     const subject = document.querySelector('#subject').value;
     const body = document.querySelector('#body').value;
 
-    google.script.run.addEmailToSchedule(recipient, subject, body);
-    reloadPage();
+    google.script.run.withSuccessHandler(displaySchedule).addEmailToSchedule(recipient, subject, body);
+
+    document.querySelector('#recipient').value="";
+    document.querySelector('#subject').value="";
+    document.querySelector('#body').value="";
 }
 
 function removeScheduledMessage(messageId){
     google.script.run.removeEmailFromSchedule(messageId);
-    reloadPage();
+
+    const table = document.querySelector("table");  
+    for (const row of table.rows) {  
+        if (row.rowIndex === messageId+1) {
+            row.remove();
+        }
+    }
 }
 
 function getEmailAddress(callback) {
@@ -63,9 +72,4 @@ function displayEmailAddress() {
     getEmailAddress(function (address) {
         document.querySelector('#userEmail').innerText = address;
     })
-}
-
-function reloadPage(){
-    google.script.run.withSuccessHandler(function(url){ window.open(url,"_top"); }).getScriptURL();
-    // TODO fix whitepage after reload (only after adding new message)
 }

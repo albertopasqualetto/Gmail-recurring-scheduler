@@ -5,9 +5,7 @@ The emails are scheduled with an easy web interface.
 
 An example of the web interface is shown in Github pages deployment.
 
-If app is showing a white screen, please reload the page.
-
-This app still not handles attachments.
+This app does not handle attachments and there is no plan to do so.
 
 Refer to [this page](https://developers.google.com/apps-script/guides/services/quotas) for quotas.
 
