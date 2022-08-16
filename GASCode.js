@@ -19,9 +19,9 @@ function sendScheduledEmails() {
   for (let message of listToSend){
     try{
       GmailApp.sendEmail(message.recipient, message.subject, message.body);
-      console.info("[" + now.toDateString() + "] Email sent to: " + value.recipient);
+      console.info("[" + now.toDateString() + "] Email sent to: " + message.recipient);
     } catch(err){
-      console.error("[" + now.toDateString() + "] Error in sendin email to: " + value.recipient);
+      console.error("[" + now.toDateString() + "] Error in sending email to: " + message.recipient);
       }
   }
   // TODO add attachment sending
@@ -68,9 +68,12 @@ function removeEmailFromSchedule(id) {
   setScheduledEmails(scheduledEmails);
 }
 
+function getUserAliases() {
+  console.log(GmailApp.getAliases())
+  return GmailApp.getAliases();
+}
 
 function getCurrentUser() {
-  // Necessary for frontend
   return Session.getActiveUser().getEmail();
 }
 
