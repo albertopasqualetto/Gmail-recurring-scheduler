@@ -2,31 +2,32 @@
 
 var currentUserAddress = "";
 
-window.onload = function () {
-    getEmailAddress(function (address) {
+window.onload = function () { getEmailAddress(function (address) {
         currentUserAddress = address;
-    });
-    displaySchedule();
-    displayEmailAddress();
 
-    //Materialize css select
-    var select = document.getElementById('from');
-    createDropdown(select)
-    if (select.length === 1) {  // if there is only the default email, select it
-        select.disabled = true;
-    }
-    var instances = M.FormSelect.init(select);
+        displayEmailAddress();
+        displaySchedule();
 
-    /* setTimeout(function () {
-        document.getElementById('myHTML').style.height = '100%';
-        document.querySelector('#myHTML > body').style.height = '100%';
-    }, 100) */
-    /* 
-    NOTE 1: This is very hacky but what is happening is #myHTML must have height set to over 100% otherwise you can't scroll on mobile (if needed)
-    This may be caused by this all being in an iframe and a lot of the height of the document rendering later.
-    This basically sets the height back to 100% like normal
-    */
-};
+
+        //Materialize css select
+        let select = document.getElementById('from');
+        createDropdown(select)
+        if (select.length === 1) {  // if there is only the default email, select it
+            select.disabled = true;
+        }
+        var instances = M.FormSelect.init(select);
+
+        /* setTimeout(function () {
+            document.getElementById('myHTML').style.height = '100%';
+            document.querySelector('#myHTML > body').style.height = '100%';
+        }, 100) */
+        /* 
+
+        NOTE 1: This is very hacky but what is happening is #myHTML must have height set to over 100% otherwise you can't scroll on mobile (if needed)
+        This may be caused by this all being in an iframe and a lot of the height of the document rendering later.
+        This basically sets the height back to 100% like normal
+        */
+});};
 
 
 function getSchedule(callback) {
