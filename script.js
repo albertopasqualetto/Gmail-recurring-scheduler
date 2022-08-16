@@ -5,6 +5,13 @@ window.onload = function () {
     displaySchedule();
     displayEmailAddress();
 
+    //Materialize css select
+    var select = document.getElementById('from');
+    createDropdown(select)
+    if (select.length === 1) {  // if there is only the default email, select it
+        select.disabled = true;
+    }
+    var instances = M.FormSelect.init(select);
 
     /* setTimeout(function () {
         document.getElementById('myHTML').style.height = '100%';
@@ -16,6 +23,17 @@ window.onload = function () {
     This basically sets the height back to 100% like normal
     */
 };
+
+function createDropdown(selectElement) {
+    getEmailAddress(function (address) {
+        selectElement.add( new Option(address, address, true, true) );
+    });
+    getAliases(function (aliases) {
+        aliases.forEach(function (alias) {
+            selectElement.add( new Option(alias, alias) );
+        })
+    });
+}
 
 function getSchedule(callback) {
     google.script.run.withSuccessHandler(callback).getScheduledEmails();
@@ -54,7 +72,7 @@ function addScheduledMessage() {
     document.querySelector('#body').value="";
 }
 
-function removeScheduledMessage(messageId){
+function removeScheduledMessage(messageId) {
     google.script.run.removeEmailFromSchedule(messageId);
 
     const table = document.querySelector("table");  
@@ -63,6 +81,10 @@ function removeScheduledMessage(messageId){
             row.remove();
         }
     }
+}
+
+function getAliases(callback) {
+    google.script.run.withSuccessHandler(callback).getUserAliases();
 }
 
 function getEmailAddress(callback) {
