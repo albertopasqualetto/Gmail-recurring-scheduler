@@ -18,7 +18,10 @@ function sendScheduledEmails() {
   }
   for (let message of listToSend){
     try{
-      GmailApp.sendEmail(message.recipient, message.subject, message.body);
+      if(message.from === getCurrentUser())
+        GmailApp.sendEmail(message.recipient, message.subject, message.body);
+      else
+        GmailApp.sendEmail(message.recipient, message.subject, message.body, {from: message.from});
       console.info("[" + now.toDateString() + "] Email sent to: " + message.recipient);
     } catch(err){
       console.error("[" + now.toDateString() + "] Error in sending email to: " + message.recipient);
@@ -49,9 +52,13 @@ function setScheduledEmails(scheduleInfo) {
 }
 
 
-function addEmailToSchedule(recipient, subject, body) {
+function addEmailToSchedule(recipient, subject, body, from) {
+  if (from === undefined)
+    from = getCurrentUser();
+
   // This is used by the web interface
   let newEmail = {
+      from: from,
       recipient: recipient,
       subject: subject,
       body: body,

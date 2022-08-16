@@ -1,7 +1,11 @@
 'use strict';
 
+var currentUserAddress = "";
 
 window.onload = function () {
+    getEmailAddress(function (address) {
+        currentUserAddress = address;
+    });
     displaySchedule();
     displayEmailAddress();
 
@@ -37,10 +41,11 @@ function displaySchedule(){
             for (let message of s) {
                 const clone = document.importNode(template.content, true);
                 let td = clone.querySelectorAll("td");
-                td[0].textContent = message.recipient;
-                td[1].textContent = message.subject;
-                td[2].textContent = message.body;
-                td[3].addEventListener('click', function (e) { removeScheduledMessage(e.target.closest('tr').rowIndex-1); });   //-1 because of header
+                td[0].textContent = message.from;
+                td[1].textContent = message.recipient;
+                td[2].textContent = message.subject;
+                td[3].textContent = message.body;
+                td[4].addEventListener('click', function (e) { removeScheduledMessage(e.target.closest('tr').rowIndex-1); });   //-1 because of header
                 newContents.appendChild(clone);
             };
 
@@ -51,12 +56,19 @@ function displaySchedule(){
 }
 
 function addScheduledMessage() {
+    const from = document.querySelector('#from').value;
     const recipient = document.querySelector('#recipient').value.trim();
     const subject = document.querySelector('#subject').value;
     const body = document.querySelector('#body').value;
-
+    
     if (recipient !== "" && (subject !== "" || body !== "")) {  //if form is valid, add message to schedule
-        google.script.run.withSuccessHandler(displaySchedule).addEmailToSchedule(recipient, subject, body);
+        google.script.run.withSuccessHandler(displaySchedule).addEmailToSchedule(recipient, subject, body, from);
+
+        //Clear form
+        const fromOptions = document.querySelectorAll('#from option');
+        fromOptions.forEach(function (option) {
+            option.selected = option.defaultSelected;
+        })
         document.querySelector('#recipient').value="";
         document.querySelector('#subject').value="";
         document.querySelector('#body').value="";
@@ -75,9 +87,10 @@ function removeScheduledMessage(messageId) {
 }
 
 function createDropdown(selectElement) {
-    getEmailAddress(function (address) {
+    selectElement.add( new Option(currentUserAddress, currentUserAddress, true, true) );
+    /* getEmailAddress(function (address) {
         selectElement.add( new Option(address, address, true, true) );
-    });
+    }); */
     getAliases(function (aliases) {
         aliases.forEach(function (alias) {
             selectElement.add( new Option(alias, alias) );
@@ -94,7 +107,8 @@ function getEmailAddress(callback) {
     google.script.run.withSuccessHandler(callback).getCurrentUser();
 }
 function displayEmailAddress() {
-    getEmailAddress(function (address) {
+    document.querySelector('#userEmail').innerText = currentUserAddress;
+   /*  getEmailAddress(function (address) {
         document.querySelector('#userEmail').innerText = address;
-    })
+    }) */
 }
