@@ -66,6 +66,8 @@ function addEmailToSchedule(recipient, subject, body, from) {
   let scheduledEmails = getScheduledEmails();
   scheduledEmails.push(newEmail);
   setScheduledEmails(scheduledEmails);
+
+  //TODO add link with Google spreadsheet for listing/setting scheduled emails
 }
 
 function removeEmailFromSchedule(id) {
@@ -75,6 +77,7 @@ function removeEmailFromSchedule(id) {
   setScheduledEmails(scheduledEmails);
 }
 
+// Used to send an email from alias: https://developers.google.com/apps-script/reference/gmail/gmail-app#sendemailrecipient,-subject,-body,-options
 function getUserAliases() {
   console.log(GmailApp.getAliases())
   return GmailApp.getAliases();

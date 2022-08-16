@@ -9,7 +9,7 @@ window.onload = function () { getEmailAddress(function (address) {
         displaySchedule();
 
 
-        //Materialize css select
+        // Materialize css select 'from'
         let select = document.getElementById('from');
         createDropdown(select)
         if (select.length === 1) {  // if there is only the default email, select it
@@ -46,12 +46,12 @@ function displaySchedule(){
                 td[1].textContent = message.recipient;
                 td[2].textContent = message.subject;
                 td[3].textContent = message.body;
-                td[4].addEventListener('click', function (e) { removeScheduledMessage(e.target.closest('tr').rowIndex-1); });   //-1 because of header
+                td[4].addEventListener('click', function (e) { removeScheduledMessage(e.target.closest('tr').rowIndex-1); });   // -1 because of header
                 newContents.appendChild(clone);
             };
 
-            document.querySelectorAll('.table-item').forEach(function (e) { e.remove() });  //Delete old table-items
-            document.querySelector("tbody").appendChild(newContents);                       //Add table-items
+            document.querySelectorAll('.table-item').forEach(function (e) { e.remove() });  // Delete old table-items
+            document.querySelector("tbody").appendChild(newContents);                       // Add table-items
         }
     )
 }
@@ -62,11 +62,11 @@ function addScheduledMessage() {
     const subject = document.querySelector('#subject').value;
     const body = document.querySelector('#body').value;
     
-    if (recipient !== "" && (subject !== "" || body !== ""))    //if form is valid, add message to schedule
+    if (recipient !== "" && (subject !== "" || body !== ""))    // If form is valid, add message to schedule
         google.script.run.withSuccessHandler(displaySchedule).addEmailToSchedule(recipient, subject, body, from);
-    //TODO add error message if form is invalid
+    // TODO add error message if form is invalid
 
-    //Clear form
+    // Clear form
     const fromOptions = document.querySelectorAll('#from option');
     fromOptions.forEach(function (option) {
         option.selected = option.defaultSelected;
@@ -74,8 +74,6 @@ function addScheduledMessage() {
     document.querySelector('#recipient').value="";
     document.querySelector('#subject').value="";
     document.querySelector('#body').value="";
-    
-    
 }
 
 function removeScheduledMessage(messageId) {
