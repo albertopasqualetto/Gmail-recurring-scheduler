@@ -24,16 +24,6 @@ window.onload = function () {
     */
 };
 
-function createDropdown(selectElement) {
-    getEmailAddress(function (address) {
-        selectElement.add( new Option(address, address, true, true) );
-    });
-    getAliases(function (aliases) {
-        aliases.forEach(function (alias) {
-            selectElement.add( new Option(alias, alias) );
-        })
-    });
-}
 
 function getSchedule(callback) {
     google.script.run.withSuccessHandler(callback).getScheduledEmails();
@@ -65,11 +55,12 @@ function addScheduledMessage() {
     const subject = document.querySelector('#subject').value;
     const body = document.querySelector('#body').value;
 
-    google.script.run.withSuccessHandler(displaySchedule).addEmailToSchedule(recipient, subject, body);
-
-    document.querySelector('#recipient').value="";
-    document.querySelector('#subject').value="";
-    document.querySelector('#body').value="";
+    if (recipient !== "" && (subject !== "" || body !== "")) {  //if form is valid, add message to schedule
+        google.script.run.withSuccessHandler(displaySchedule).addEmailToSchedule(recipient, subject, body);
+        document.querySelector('#recipient').value="";
+        document.querySelector('#subject').value="";
+        document.querySelector('#body').value="";
+    }
 }
 
 function removeScheduledMessage(messageId) {
@@ -82,6 +73,18 @@ function removeScheduledMessage(messageId) {
         }
     }
 }
+
+function createDropdown(selectElement) {
+    getEmailAddress(function (address) {
+        selectElement.add( new Option(address, address, true, true) );
+    });
+    getAliases(function (aliases) {
+        aliases.forEach(function (alias) {
+            selectElement.add( new Option(alias, alias) );
+        })
+    });
+}
+
 
 function getAliases(callback) {
     google.script.run.withSuccessHandler(callback).getUserAliases();
