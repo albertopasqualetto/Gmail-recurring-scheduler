@@ -62,18 +62,20 @@ function addScheduledMessage() {
     const subject = document.querySelector('#subject').value;
     const body = document.querySelector('#body').value;
     
-    if (recipient !== "" && (subject !== "" || body !== "")) {  //if form is valid, add message to schedule
+    if (recipient !== "" && (subject !== "" || body !== ""))    //if form is valid, add message to schedule
         google.script.run.withSuccessHandler(displaySchedule).addEmailToSchedule(recipient, subject, body, from);
+    //TODO add error message if form is invalid
 
-        //Clear form
-        const fromOptions = document.querySelectorAll('#from option');
-        fromOptions.forEach(function (option) {
-            option.selected = option.defaultSelected;
-        })
-        document.querySelector('#recipient').value="";
-        document.querySelector('#subject').value="";
-        document.querySelector('#body').value="";
-    }
+    //Clear form
+    const fromOptions = document.querySelectorAll('#from option');
+    fromOptions.forEach(function (option) {
+        option.selected = option.defaultSelected;
+    })
+    document.querySelector('#recipient').value="";
+    document.querySelector('#subject').value="";
+    document.querySelector('#body').value="";
+    
+    
 }
 
 function removeScheduledMessage(messageId) {
