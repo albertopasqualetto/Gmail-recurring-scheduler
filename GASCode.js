@@ -99,6 +99,6 @@ function doGet() {
       // This setting may expose to to cross site scripting but will allow your app to work anywhere
       //.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
       ///.setFaviconUrl(iconUrl)
-      .setTitle("Gmail daily scheduler")
+      .setTitle("Gmail recurring scheduler")
       .addMetaTag('viewport', 'width=device-width, initial-scale=1');
 }
