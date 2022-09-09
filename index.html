@@ -16,8 +16,15 @@
     <form class="col s12" autocomplete="off">
         <div class="row">
             <div class="input-field col s12">
-                <select name="from" id="from" required></select>
-                <label for="from">From</label>
+                <select name="from-alias" id="from-alias" required></select>
+                <label for="from-alias">From alias</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input value="" name="from-name" id="from-name" required>
+                <label class="active" for="from-name">From name</label>
             </div>
         </div>
 
@@ -56,7 +63,8 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th style="min-width: 100px;max-width: 300px;width: 270px;">From</th>
+                    <th style="min-width: 100px;max-width: 300px;width: 270px;">From alias</th>
+                    <th style="min-width: 100px;max-width: 300px;width: 270px;">From name</th>
                     <th>Recipient</th>
                     <th>Subject</th>
                     <th>Body</th>
@@ -71,7 +79,7 @@
     <br>
 
     <div class="center">
-        <span id="userEmail"></span> is logged in | <a href="https://accounts.google.com/logout" rel="noopener" target="_blank">Logout</a>
+        <span id="user-email"></span> is logged in | <a href="https://accounts.google.com/logout" rel="noopener" target="_blank">Logout</a>
     </div>
 
 
@@ -81,8 +89,9 @@
     </footer>
 
 
-    <template id="mockRow">
+    <template id="mock-row">
         <tr class="table-item">
+            <td></td>
             <td></td>
             <td></td>
             <td></td>

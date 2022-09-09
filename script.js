@@ -9,13 +9,18 @@ window.onload = function () { getEmailAddress(function (address) {
         displaySchedule();
 
 
-        // Materialize css select 'from'
-        let select = document.getElementById('from');
-        createDropdown(select)
-        if (select.length === 1) {  // if there is only the default email, select it
-            select.disabled = true;
+        // Materialize css select 'from-alias' and populate with aliases
+        let selectFromAlias = document.getElementById('from-alias');
+        createDropdown(selectFromAlias)
+        if (selectFromAlias.length === 1) {  // if there is only the default email, select it
+            selectFromAlias.disabled = true;
         }
-        var instances = M.FormSelect.init(select);
+        M.FormSelect.init(selectFromAlias);
+        
+        // Materialize css select 'from-name' and populate it with default name
+        let selectFromName = document.getElementById('from-name');
+        selectFromName.value = currentUserAddress;
+        M.updateTextFields();
 
         /* setTimeout(function () {
             document.getElementById('myHTML').style.height = '100%';
@@ -37,16 +42,17 @@ function displaySchedule(){
     getSchedule(
         function (s) {
             // Use the HTML template to create each message's row
-            const template = document.querySelector('#mockRow');
+            const template = document.querySelector('#mock-row');
             let newContents = document.createDocumentFragment();
             for (let message of s) {
                 const clone = document.importNode(template.content, true);
                 let td = clone.querySelectorAll("td");
-                td[0].textContent = message.from;
-                td[1].textContent = message.recipient;
-                td[2].textContent = message.subject;
-                td[3].textContent = message.body;
-                td[4].addEventListener('click', function (e) { removeScheduledMessage(e.target.closest('tr').rowIndex-1); });   // -1 because of header
+                td[0].textContent = message.fromAlias;
+                td[1].textContent = message.fromName;
+                td[2].textContent = message.recipient;
+                td[3].textContent = message.subject;
+                td[4].textContent = message.body;
+                td[5].addEventListener('click', function (e) { removeScheduledMessage(e.target.closest('tr').rowIndex-1); });   // -1 because of header
                 newContents.appendChild(clone);
             };
 
@@ -57,20 +63,22 @@ function displaySchedule(){
 }
 
 function addScheduledMessage() {
-    const from = document.querySelector('#from').value;
+    const fromAlias = document.querySelector('#from-alias').value;
+    const fromName = document.querySelector('#from-name').value;
     const recipient = document.querySelector('#recipient').value.trim();
     const subject = document.querySelector('#subject').value;
     const body = document.querySelector('#body').value;
     
     if (recipient !== "" && (subject !== "" || body !== ""))    // If form is valid, add message to schedule
-        google.script.run.withSuccessHandler(displaySchedule).addEmailToSchedule(recipient, subject, body, from);
+        google.script.run.withSuccessHandler(displaySchedule).addEmailToSchedule(recipient, subject, body, fromAlias, fromName);
     // TODO add error message if form is invalid
 
     // Clear form
-    const fromOptions = document.querySelectorAll('#from option');
+    const fromOptions = document.querySelectorAll('#from-alias option');
     fromOptions.forEach(function (option) {
         option.selected = option.defaultSelected;
     })
+    document.querySelector('#from-name').value=currentUserAddress;
     document.querySelector('#recipient').value="";
     document.querySelector('#subject').value="";
     document.querySelector('#body').value="";
@@ -108,8 +116,8 @@ function getEmailAddress(callback) {
     google.script.run.withSuccessHandler(callback).getCurrentUser();
 }
 function displayEmailAddress() {
-    document.querySelector('#userEmail').innerText = currentUserAddress;
+    document.querySelector('#user-email').innerText = currentUserAddress;
    /*  getEmailAddress(function (address) {
-        document.querySelector('#userEmail').innerText = address;
+        document.querySelector('#user-email').innerText = address;
     }) */
 }
