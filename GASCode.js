@@ -1,5 +1,6 @@
 /****** `sendScheduledEmails` IS THE FUNCTION TO BE SCHEDULED ******/
 
+// github.com/albertopasqualetto/Gmail-recurring-scheduler
 
 /*
   userProperties.getProperty('scheduledData')
@@ -97,7 +98,7 @@ function doGet() {
   return HtmlService.createHtmlOutputFromFile('index')
       // This setting may expose to to cross site scripting but will allow your app to work anywhere
       //.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
-      ///.setFaviconUrl(iconUrl) 
+      ///.setFaviconUrl(iconUrl)
       .setTitle("Gmail daily scheduler")
       .addMetaTag('viewport', 'width=device-width, initial-scale=1');
 }

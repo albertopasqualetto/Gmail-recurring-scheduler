@@ -1,3 +1,5 @@
+// github.com/albertopasqualetto/Gmail-recurring-scheduler
+
 'use strict';
 
 var currentUserAddress = "";
@@ -9,15 +11,15 @@ window.onload = function () { getEmailAddress(function (address) {
         displaySchedule();
 
 
-        // Materialize css select 'from-alias' and populate with aliases
+        // Populate select 'from-alias' with aliases and apply Materialize css
         let selectFromAlias = document.getElementById('from-alias');
         createDropdown(selectFromAlias)
         if (selectFromAlias.length === 1) {  // if there is only the default email, select it
             selectFromAlias.disabled = true;
         }
         M.FormSelect.init(selectFromAlias);
-        
-        // Materialize css select 'from-name' and populate it with default name
+
+        // Populate input 'from-name' with default name and apply Materialize css
         let selectFromName = document.getElementById('from-name');
         selectFromName.value = currentUserAddress;
         M.updateTextFields();
@@ -26,7 +28,7 @@ window.onload = function () { getEmailAddress(function (address) {
             document.getElementById('myHTML').style.height = '100%';
             document.querySelector('#myHTML > body').style.height = '100%';
         }, 100) */
-        /* 
+        /*
 
         NOTE 1: This is very hacky but what is happening is #myHTML must have height set to over 100% otherwise you can't scroll on mobile (if needed)
         This may be caused by this all being in an iframe and a lot of the height of the document rendering later.
@@ -68,7 +70,7 @@ function addScheduledMessage() {
     const recipient = document.querySelector('#recipient').value.trim();
     const subject = document.querySelector('#subject').value;
     const body = document.querySelector('#body').value;
-    
+
     if (recipient !== "" && (subject !== "" || body !== ""))    // If form is valid, add message to schedule
         google.script.run.withSuccessHandler(displaySchedule).addEmailToSchedule(recipient, subject, body, fromAlias, fromName);
     // TODO add error message if form is invalid
@@ -87,8 +89,8 @@ function addScheduledMessage() {
 function removeScheduledMessage(messageId) {
     google.script.run.removeEmailFromSchedule(messageId);
 
-    const table = document.querySelector("table");  
-    for (const row of table.rows) {  
+    const table = document.querySelector("table");
+    for (const row of table.rows) {
         if (row.rowIndex === messageId+1) {
             row.remove();
         }
